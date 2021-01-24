@@ -14,8 +14,9 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = Path.joinpath(BASE_DIR,'templates')
-
+TEMPLATE_DIR = Path.joinpath(BASE_DIR,"templates")
+STATIC_DIR   = Path.joinpath(BASE_DIR,"static")
+MEDIA_DIR    = Path.joinpath(BASE_DIR,"media")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'accounts',
-    'social',
+    'groups',
+    'posts'
 ]
 
 MIDDLEWARE = [
@@ -128,7 +130,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIR = [Path.joinpath(BASE_DIR,'static'),]   
+STATICFILES_DIRS = [STATIC_DIR,]   
+
+
+MEDIA_URL  = '/media/'
+MEDIAFILES_DIRS = [MEDIA_DIR,]
+MEDIA_ROOT = MEDIA_DIR
+
 
 LOGIN_REDIRECT_URL = '/'
 

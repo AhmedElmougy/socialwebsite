@@ -1,0 +1,12 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: ahmed.m.elmogy@gmail.com
+Date: Wed, 13 Jan 2021 08:58:31 -0000
+Message-ID: <161052831198.10088.9105522154300226147@DESKTOP-UDR1A9Q>
+
+Someone asked for password reset for email ahmed.m.elmogy@gmail.com. Follow the link below:
+http://127.0.0.1:8000/accounts/reset/Mg/ageuhj-e0e561af43177cebea45357c95f1fdbb/
+-------------------------------------------------------------------------------

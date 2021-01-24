@@ -1,0 +1,87 @@
+{% extends 'groups/group_base.html' %}
+{% load static %}
+{% block header_block %}
+<title>Group details</title>
+{% endblock header_block %}
+
+
+{% block pregroup %}
+{% endblock %}
+
+{% block group_content %}
+
+<div class='jumbotron'>
+
+    {% if messages %}
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-6 col-sm-offset-3">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <p class='d-flex justify-content-center'>{{ message }}</p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+    <h1 class="display-4 d-flex justify-content-center">{{group.name|safe|linebreaks}}</h1>
+
+    {% if group.image %}
+        <img src= "{{group.image.url}}" class="img-fluid rounded mx-auto d-block" alt="{{group.title}}" height="500"  style="max-width: 80%;" > 
+    {% else %}    
+        <img src= "{% static 'images/group_blank.jpg' %}" class="img-fluid rounded mx-auto d-block" alt="{{group.title}}" height="500"  style="max-width: 80%;" > 
+    {% endif %}
+    
+    <br>
+    <div class="d-flex d-flex justify-content-between">
+        <div class="lead p-2"><small class="text-muted">@{{group.auther}}</small></div>
+        <div class="lead p-2"><small class="text-muted">{{group.created_at|date:"D d M Y" }}</small></div>
+    </div>
+    <hr>
+
+    <p><b>Description</b></p>
+    <p> {{group.description|safe|linebreaks}}</p>  
+
+</div>
+
+{% if user.is_authenticated %}
+    {% if user in group.member.all %}
+        <a class="btn btn-primary btn-sm" href="{% url 'groups:leave_group' pk=group.pk slug=group.slug %}" role="button"><i class="fa fa-plus-square" aria-hidden="true"></i> leave</a>
+    {% else %}
+        <a class="btn btn-primary btn-sm" href="{% url 'groups:join_group' pk=group.pk slug=group.slug %}" role="button"><i class="fa fa-plus-square" aria-hidden="true"></i> Join</a>
+    {% endif %}    
+    {% if user == group.auther %}
+        <a class="float-right btn btn-outline-secondary btn-sm" href="{% url 'groups:edit_group' pk=group.pk slug=group.slug %}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+                    
+        <!-- Button trigger modal -->
+            <a class="float-right btn btn-outline-danger btn-sm" role="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Group delete confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>are you sure you want to delete group</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a role="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                        <a role="button" class="btn btn-danger" href="{% url 'groups:delete_group' pk=group.pk slug=group.slug %}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    {% endif %}
+{% endif %}
+
+<br><br>
+
+
+{% endblock  %}

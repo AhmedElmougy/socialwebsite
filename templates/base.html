@@ -35,11 +35,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'admin:index' %}"><b>admin</b></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'groups:group_list' %}"><b>Groups</b></a>
+                </li>
               </ul>
               
                
             
               <ul class="navbar-nav ml-auto">          
+                <li class="nav-link">
+                    <a class="nav-link" href="{% url 'groups:create_group' %}"><b>Create Group</b></a>
+                </li>
                 <li class="nav-link">
                     <div class="btn-group" role="group">
                         <i id="btnGroupDrop1"  class="fa fa-user-circle-o fa-2x" data-toggle="dropdown" aria-haspopup="true"  aria-hidden="true"></i>
@@ -63,12 +69,12 @@
         </nav>
 
         
-        {%block body_block %}
-        {% endblock body_block%}
         
     </div>
         
-
+    {%block body_block %}
+    {% endblock body_block%}
+        
         
   
 
@@ -79,7 +85,7 @@
 
     <!-- MediumEditorCDN -->
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
-    <script src="{% static 'js/popup.js' %}"></script>
+    
     <script>
         var editor = new MediumEditor('.editable', 
             {

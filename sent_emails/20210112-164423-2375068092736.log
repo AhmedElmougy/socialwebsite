@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: ahmed.m.elmogy@gmail.com
+Date: Tue, 12 Jan 2021 14:44:23 -0000
+Message-ID: <161046266384.13392.13944594305443939145@DESKTOP-UDR1A9Q>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/Mg/agdftz-a620a222c72c9ab44fc2d38c8f3eef1f/
+
+Your username, in case you’ve forgotten: mogi
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

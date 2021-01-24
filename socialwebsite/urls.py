@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views
-from social import views as social_views
+from django.conf import settings
+from django.conf.urls.static import static
+from groups import views as groups_view
 
 urlpatterns = [
-    path('',social_views.IndexView.as_view(),name='index'),
+    path('',groups_view.IndexView.as_view(),name='index'),
     path('admin/', admin.site.urls),
     path("accounts/", include("accounts.urls",namespace='accounts')),
+    path("groups/"  , include("groups.urls"  ,namespace='groups')),
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

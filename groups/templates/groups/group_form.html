@@ -1,0 +1,26 @@
+{% extends 'groups/group_base.html' %}
+
+{% load bootstrap4 %}
+
+
+{% block group_content %}
+
+{% if  not form.instance.pk %}
+    <h1>Create new group</h1>
+{% else %}
+    <h1>Update group</h1>
+{% endif %}
+
+<br><br>
+
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+{% bootstrap_form form %}
+<br><br>
+        
+<input type="submit" class="btn btn-primary sm-btn" value="Submit">
+
+
+</form>
+
+{% endblock  %}

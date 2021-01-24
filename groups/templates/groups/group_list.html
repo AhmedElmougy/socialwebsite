@@ -1,0 +1,86 @@
+{% extends 'groups/group_base.html' %}
+{% load static %}
+{% block header_block %}
+<title>Groups</title>
+{% endblock header_block %}
+
+{% block group_content %}
+
+<div class='jumbotron'>
+<h1 class='display-4 text-center'>Groups</h1>
+</div>
+
+
+
+<br><br><br>
+<div class='container '>
+    <div class="row justify-content-left ">
+        
+
+            {% for group in group_list %}
+                <div class="card" style="width: 18rem;">
+                    
+                    <a href="{% url 'groups:group_details' pk=group.pk slug=group.slug %}">
+                    {% if  group.image %}
+                        <img class="card-img-top " src="{{group.image.url}}" alt='{{group.name}}' height="180">
+                    {% else %}
+                        <img class="card-img-top" src="{% static 'images/group_blank.jpg' %}" alt='{{group.name}}' height="180">
+                    {% endif %}
+                    </a>
+                        
+                    <div class="card-body">
+                        <small class="text-muted  float-right"><span class="badge badge-secondary">{{ group.member.count }}</span> member{{ group.member.count|pluralize }}</small>
+                        <h5 class="card-title">{{group.name}}</h5>
+                        {% comment %} <h5 class="card-title float-right">{{group.name}}</h5> {% endcomment %}
+                        
+
+                        <p class="card-text">{{group.description|slice:":25" }} {% if group.description|length >= 25 %}....{% endif %}</p>
+                        
+
+                        {% if user.is_authenticated %}
+                            {% if user in group.member.all %}
+                                <a class="btn btn-primary btn-sm" href="{% url 'groups:leave_group' pk=group.pk slug=group.slug %}" role="button"><i class="fa fa-plus-square" aria-hidden="true"></i> leave</a>
+                            {% else %}
+                                <a class="btn btn-primary btn-sm" href="{% url 'groups:join_group' pk=group.pk slug=group.slug %}" role="button"><i class="fa fa-plus-square" aria-hidden="true"></i> Join</a>
+                            {% endif %}
+
+                            {% if user == group.auther %}
+                                <a class="float-right btn btn-outline-secondary btn-sm" href="{% url 'groups:edit_group' pk=group.pk slug=group.slug %}" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+                    
+                                <!-- Button trigger modal -->
+                                    <a class="float-right btn btn-outline-danger btn-sm" role="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Group delete confirmation</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>are you sure you want to delete group</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a role="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                                <a role="button" class="btn btn-danger" href="{% url 'groups:delete_group' pk=group.pk slug=group.slug %}">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            {% endif %}    
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                <br><br>
+
+            {% endfor %}
+        
+    </div>
+</div>    
+
+
+
+{% endblock  %}

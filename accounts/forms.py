@@ -14,11 +14,3 @@ class UserCreateForm(UserCreationForm):
            
         } 
 
-class LoginForm(AuthenticationForm):
-    class Meta:
-
-        widgets = {
-            'username':forms.TextInput(attrs={ 'class':"form-control",'placeholder':'User Name'}),
-            'password':forms.EmailInput(attrs={ 'class':"form-control",'placeholder':'*********'}),
-           
-        }
