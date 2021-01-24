@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block header_block %}
+<title>Post form</title>
+{% endblock header_block %}
+
+{% block body_block %}
+<div class="jumbotron">
+
+        {% if  not form.instance.pk %}
+            <h1>Create new post</h1>
+        {% else %}
+            <h1>Update post</h1>
+        {% endif %}
+    
+    <br><br>
+    
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    
+        {% bootstrap_form form %}
+        
+        <br><br>
+        
+        <input type="submit" class="btn btn-primary sm-btn" value="Submit">
+        
+    </form>
+</div>
+{% endblock body_block %}

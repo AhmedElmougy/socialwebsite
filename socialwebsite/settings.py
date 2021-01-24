@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR,"templates")
 STATIC_DIR   = Path.joinpath(BASE_DIR,"static")
 MEDIA_DIR    = Path.joinpath(BASE_DIR,"media")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
