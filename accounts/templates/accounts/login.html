@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+<title>Login</title>
+{% endblock header_block %}
+
+{% block body_block %}
+
+<br><br><br>
+
+<div class='container'>
+    <div class='row justify-content-center align-items-center'>
+    <aside class="col-sm-4 ">
+        <div class="card">
+            <article class="card-body">
+                <a href="{% url 'accounts:signup' %}" class="float-right btn btn-outline-primary">Sign up</a>
+                <h4 class="card-title text-left mb-4 mt-1">Sign in</h4>
+                <hr>
+                <p class="text-success text-center">please enter email and password</p>
+
+                {% if form.errors %}
+                    <p class='text-center'>Your username and password didn't match. Please try again.</p>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>        
+                            </div>
+                            <input for='id_username' name='username' class="form-control" placeholder="User Name" type="text">
+                        </div> <!-- input-group.// -->
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                            </div>
+                            <input for='id_password' name='password' class="form-control" placeholder="**********" type="password">
+                        </div> <!-- input-group.// -->
+                    </div> <!-- form-group// -->
+
+                    <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </div> <!-- form-group// -->
+                    <p class="text-center"><a href="{% url 'accounts:password_reset' %}">Forgot password?</a></p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
+    </aside> <!-- col.// -->
+    </div>
+</div> <!--container end.//-->            
+
+
+
+<br><br><br>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header_block %}
+<title>Logout</title>
+{% endblock header_block %}
+
+
+{% block body_block %}
+  <div class='jumbotron'>
+    <h1>Logged out!</h1>
+    <a href="{% url 'accounts:login'%}">Click here to login again.</a>
+  </div>
+  
+{% endblock %}
