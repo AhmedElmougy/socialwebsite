@@ -1,0 +1,48 @@
+{% load static %}
+{% if user.is_authenticated %}
+    {% if user in group.member.all %}
+        {% comment %} creat new post {% endcomment %}
+        <a class="btn btn-primary btn-sm" href="{% url 'post:new_post' pk=group.pk group=group.slug %}" role="button"><i class="fa fa-plus-square" aria-hidden="true"></i> Create post</a>
+        <br><br><br>
+        <div class="row justify-content-left">   
+            {% for post in group.posts.all %}
+               <div class="well">
+                    <div class="media">
+                        <a class='pull-left' href="{% url 'post:post_details' pk=post.pk %}">
+                            {% if  post.image %}
+                                <img class="media-object mx-3 img-thumbnail" src="{{post.image.url}}" alt="{% static 'images/post/post_blank.png' %}" width="150" height="150">
+                            {% else %}
+                                <img class="media-object mx-3 img-thumbnail" src="{% static 'images/post/post_blank.png' %}" alt='{{group.name|safe|linebreaks}}' width="150" height="150">
+                            {% endif %}
+                        </a>
+                        <div class="media-body">
+                            <p class="float-right">By {{post.auther}}</p>
+                            <h4 class="media-heading">{{post.title|safe}}</h4>
+                            <p>{{post.body| striptags | safe | escape}}</p>
+                            <ul class="list-inline list-unstyled">
+                                <li class='list-inline-item'><span><i class="fa fa-calendar" aria-hidden="true"></i> {{post.created_at|date:"D d M Y"}} </span></li>
+                                <li class='list-inline-item'>|</li>
+                                <span><i class="fa fa-comment" aria-hidden="true"></i><span> {{ post.comments.count }}</span>  comment{{ post.comments.count|pluralize }}</span>
+                                <li class='list-inline-item'>|</li>
+                                <li class='list-inline-item'>
+                                <span><i class="fa fa-facebook-square"></i></span>
+                                <span><i class="fa fa-twitter-square"></i></span>
+                                <span><i class="fa fa-google-plus-square"></i></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+            {% endfor %}
+        </div> 
+    {% else %}   
+    <p>join group to see group posts</p>
+    {% endif %}
+{% else %}
+    <p><a href="{% url 'accounts:login' %}">Login</a> to see group posts</p>
+{% endif %}
+
+<br><br>
